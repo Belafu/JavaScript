@@ -25,14 +25,6 @@ for (var i = 0; i < cantTareas; i++) {
 
   ul.append(li);
 }
-/*De igual manera, crearemos un párrafo <p>, con el texto "Tareas completadas: 0".
-Una vez con los <li> en nuestro documento, vamos a permitir que cada uno de ellos pueda ser clickeado y que al ser clickeado, el mismo desaparezca después de medio segundo. Así mismo, en el párrafo que dice "Tareas completadas: 0" el número 0 deberá aumentar en 1 por cada tarea eliminada.
-
-Al momento en que todas las tareas se hayan completado se deberá mostrar un texto llamativo que diga: "¡Felicitaciones, estás al día con tus tareas!". Y un contador numérico que vaya desde 5 hasta 0.
-
-Finalmente cuando el contador llegue a 0, llevaremos al visitante al sitio web de Netflix.
-
- Ahora bien, después del proceso de solicitud de tareas, se debe setear un timer que permita preguntarle al usuario por medio de un alerta, tras 5 segundos de inactividad, "Ey ¿Estás ahí?". Tener en cuenta que si el usuario está activo dentro del documento dicho timer se debe limpiar.*/
 
 var contadorTareas = 0;
 var parrafo = document.createElement('p');
@@ -56,11 +48,26 @@ losLi.forEach(function(li){
         felicidad.innerText = "¡Felicitaciones, estás al día con tus tareas!";
         felicidad.style.color = "green";
         body.append(felicidad);
+
+        var contador = 5;
+        var numero = document.createElement('p');
+        numero.style.textAlign = "center";
+        numero.innerText = contador;
+        numero.style.fontSize = "50px";
+        body.append(numero);
+        var decremento = setInterval(decrecer,1000);
+        function decrecer(){
+          contador--;
+          numero.innerText = contador;
+          if (contador==0) {
+            clearInterval(decremento);
+            location.href ='https://netflix.com' ;
+          }
+        }
+
       }
   };
 });
-
-
 /*NO LE gustaa el forrr
 for (var i = 0; i < losLi.length; i++) {
     losLi[i].onclick = function(){
@@ -70,3 +77,18 @@ for (var i = 0; i < losLi.length; i++) {
     newParrafo.innerText = "Tareas completadas: "+contadorTareas;
   };
 }*/
+
+var tiempoInacti = 5;
+var alertaInact = setInterval(alertarInactividad,1000);
+function alertarInactividad(){
+  console.log(tiempoInacti);
+   tiempoInacti--;
+   if (tiempoInacti==0) {
+    alert("Ey ¿Estás ahí?");
+    tiempoInacti=5;
+   }
+}
+body.onmousemove = function(){
+   tiempoInacti = 5;
+   console.log(tiempoInacti);
+};
