@@ -35,11 +35,18 @@ inputEmail.onblur = function() {
 
 var inputTelefono = document.querySelector("[name=phone]");
 var numeroRegex = /^([0-9])*$/;
+console.log(numeroRegex.test(12));
+console.log(numeroRegex.test("ahvf"));
+
 inputTelefono.onblur = function() {
+  console.log(inputTelefono.value);
+  console.log("entro");
   if (!numeroRegex.test(inputTelefono.value)) {
       mensajesCorrecion[2].innerText = "Solo numeros";
   }else {
-    mensajesCorrecion[2].innerTex = "";
+    mensajesCorrecion[2].innerText = " ";
+    //  inputTelefono.classList.remove("is-invalid");
+
   }
 }
 
